@@ -12,22 +12,16 @@
     </nav>
     <section class="section">
       <p>Enter sides of right angled triangle and get hypotenuse</p>
+      <img src="../assets/right-triangle.svg" class="hero" />
       <div class="space"></div>
-    <div class="container">
-        <center>
-      <div class="small" id="heron">
-        <div class="center">Using Heron's formula</div>
-      </div>
-      <div class="small" id="base-height">
-        <div class="center">Using base and height</div>
-      </div>
-      <div class="small" id="included-angle">
-        <div class="center">
-          Using 2 sides and the included angle between them
-        </div>
-      </div>
-      <div class="small" id="equilateral-triangle"><div class="center">Equilateral Triangle</div></div>
-    </center>
+      <h3>C=<span id="output">hypotenuse</span></h3>
+      <span>Side a:<input type="number" id="side-a" /></span>
+      <br />
+      <span>Side b:<input type="number" id="side-b" /></span>
+      <br />
+      <br />
+      <button id="submit-btn">Calculate Hypotenuse</button>
+      <div class="space"></div>
     </section>
     <script src="app.js"></script>
   </body>

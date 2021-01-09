@@ -77,3 +77,21 @@ a {
   max-width: 60%;
   text-align: center;
 }
+.right-triangle {
+  margin: auto;
+
+  margin-left: 30%;
+}
+
+.hero {
+  max-width: 20rem;
+  height: 15rem;
+  color: var(--secondary-color);
+}
+#submit-btn {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  font-size: larger;
+}
