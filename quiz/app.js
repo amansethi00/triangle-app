@@ -7,6 +7,8 @@ var option1 = document.querySelector("#option-1");
 var option2 = document.querySelector("#option-2");
 var option3 = document.querySelector("#option-3");
 var option4 = document.querySelector("#option-4");
+const option = document.querySelectorAll(".option");
+const li = document.querySelectorAll("li");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 const values = ["Quiz on isoceles triangle","Quiz on equilateral triangle","Quiz on right-angled triangle","Random Quiz"]
@@ -17,29 +19,31 @@ for(let i=0;i<btn.length;i++){
         head.innerHTML = values[i];
         if(i===0){
             question.innerHTML = list[0].question;
-            for(var j=0;j<list[0].options.length;j++){
-                (option+j).innerHTML = list[0].options[i];
+            // option1.innerHTML=list[0].options[0];
+            for(var j=0;j<option.length;j++){
+                option[j].innerHTML = list[0].options[j];
             }
+
 
             
         }
         else if(i===1){
             question.innerHTML = list[5].question;
-            for(var j=0;j<list[5].options.length;j++){
-                (option+j).innerHTML = list[5].options[i];
+            for(var j=0;j<option.length;j++){
+                option[j].innerHTML = list[5].options[j];
             }
         }
         else if(i===2){
             question.innerHTML = list[8].question;
-            for(var j=0;j<list[8].options.length;j++){
-                (option+j).innerHTML = list[8].options[i];
+            for(var j=0;j<option.length;j++){
+                option[j].innerHTML = list[8].options[j];
             }
         }
         else if(i===3){
             let k=parseInt(Math.random()*10);
             question.innerHTML = list[k].question;
-            for(var j=0;j<list[k].options.length;j++){
-                (option+j).innerHTML = list[k].options[i];
+            for(var j=0;j<option.length;j++){
+                option[j].innerHTML = list[k].options[j];
             }
         }
         
@@ -85,7 +89,7 @@ const list  = [
         answer:"similar",
     },
     {
-        question:"The relation between the altitude, median, angle bisector, and perpendicular bisector for each side in equilateral triangle is",
+        question:"The relation between the altitude, median, angle bisector, and perpendicular bisector for each side in equilateral triangle is ____",
         options:["all are same","all are perpendicular to each other","bisect the triangle","none of the above"],
         answer:"all are same",
     },
@@ -112,4 +116,11 @@ const list  = [
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+}
+
+function listHandler(event){
+    console.log(event.target.value);
+}
+for(let p=0;p<li.length;p++){
+    li[p].addEventListener("click",listHandler);
 }

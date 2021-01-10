@@ -168,15 +168,18 @@ body {
   max-width: 100%;
   font-weight: bolder;
   font-size: larger;
+  color: var(--secondary-color);
 }
-li {
+.option {
   display: inline-block;
   width: 7rem;
-  height: 3rem;
+  height: 5rem;
+  text-align: center;
   background-color: var(--secondary-color);
   margin: 1rem 1rem;
   border: 1px solid black;
   border-radius: 1rem;
+  cursor: pointer;
 
   /* margin: 0;
   position: absolute; */
@@ -185,6 +188,6 @@ li {
   /* -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); */
 }
-.container-1 {
+.contain-1 {
   max-width: 25rem;
 }
