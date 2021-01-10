@@ -8,6 +8,7 @@ var option2 = document.querySelector("#option-2");
 var option3 = document.querySelector("#option-3");
 var option4 = document.querySelector("#option-4");
 const option = document.querySelectorAll(".option");
+const submitBtn = document.querySelector("#submit-btn-heron");
 const li = document.querySelectorAll("li");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -118,9 +119,14 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+function checkAnswerHandler(){
+
+}
 function listHandler(event){
     console.log(event.target.value);
 }
 for(let p=0;p<li.length;p++){
     li[p].addEventListener("click",listHandler);
 }
+
+submitBtn.addEventListener("click",checkAnswerHandler)

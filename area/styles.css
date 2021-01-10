@@ -122,3 +122,20 @@ body {
 #angle {
   margin-left: -11rem;
 }
+.footer {
+  width: 100%;
+  height: 3rem;
+  background-color: var(--secondary-color);
+  margin-top: 7rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7rem;
+}
+li {
+}
+.social-links {
+  display: inline;
+  margin: 0 2rem;
+}
