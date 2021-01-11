@@ -3,67 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz on Triangles</title>
+    <title>Quiz on triangles</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <nav class="navigation">
-      <div class="nav-brand">Quiz on Triangles</div>
-    </nav>
-    <div class="space"></div>
-    <div class="container">
-      <center>
-        <div class="small myBtn" id="heron">
-          <div class="center">Quiz on isoceles triangle</div>
+    <nav class="navigation"><div class="nav-brand">Random Quiz</div></nav>
+    <div id="container">
+      <div id="start">Start Quiz!</div>
+      <div id="quiz" style="display: none">
+        <div id="question"></div>
+        <div id="qImg"></div>
+        <div id="choices">
+          <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+          <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+          <div class="choice" id="C" onclick="checkAnswer('C')"></div>
         </div>
-        <div class="small myBtn" id="base-height">
-          <div class="center">Quiz on equilateral triangle</div>
+        <div id="timer">
+          <div id="counter"></div>
+          <div id="btimeGauge"></div>
+          <div id="timeGauge"></div>
         </div>
-        <div class="small myBtn" id="included-angle">
-          <div class="center">Quiz on right-angled triangle</div>
-        </div>
-        <div class="small myBtn" id="equilateral-triangle">
-          <div class="center">Random Quiz</div>
-        </div>
-        <!-- <h2>Modal Example</h2> -->
-
-        <!-- Trigger/Open The Modal -->
-        <!-- <button id="myBtn">Open Modal</button> -->
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-
-            <div id="head">Heading</div>
-            <div class="contain-1">
-              <p id="question">Some text in the Modal..</p>
-
-              <li id="option-1" class="option">Option 1</li>
-              <li id="option-2" class="option">Option 2</li>
-              <li id="option-3" class="option">Option 3</li>
-              <li id="option-4" class="option">Option 4</li>
-
-              <button id="submit-btn-heron">Check answer</button>
-            </div>
-          </div>
-        </div>
-      </center>
+        <div id="progress"></div>
+      </div>
+      <div id="scoreContainer" style="display: none"></div>
     </div>
-    <footer class="footer">
-      <ul>
-        <li class="social-links">
-          <a href="https://github.com/amansethi00/">GITHUB</a>
-        </li>
-        <li class="social-links">
-          <a href="https://dev.to/amansethi00">BLOGS</a>
-        </li>
-        <li class="social-links">
-          <a href="https://twitter.com/amansethi00">TWITTER</a>
-        </li>
-      </ul>
-    </footer>
     <script src="app.js"></script>
   </body>
 </html>

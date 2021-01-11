@@ -1,132 +1,172 @@
-var modal = document.getElementById("myModal");
-var head = document.querySelector("#head");
-// Get the button that opens the modal
-var btn = document.querySelectorAll(".myBtn");
-var question = document.querySelector("#question");
-var option1 = document.querySelector("#option-1");
-var option2 = document.querySelector("#option-2");
-var option3 = document.querySelector("#option-3");
-var option4 = document.querySelector("#option-4");
-const option = document.querySelectorAll(".option");
-const submitBtn = document.querySelector("#submit-btn-heron");
-const li = document.querySelectorAll("li");
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-const values = ["Quiz on isoceles triangle","Quiz on equilateral triangle","Quiz on right-angled triangle","Random Quiz"]
-// When the user clicks the button, open the modal 
-for(let i=0;i<btn.length;i++){
-    btn[i].onclick = btn.onclick = function() {
-        modal.style.display = "block";
-        head.innerHTML = values[i];
-        if(i===0){
-            question.innerHTML = list[0].question;
-            // option1.innerHTML=list[0].options[0];
-            for(var j=0;j<option.length;j++){
-                option[j].innerHTML = list[0].options[j];
-            }
+// select all elements
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const qImg = document.getElementById("qImg");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const counter = document.getElementById("counter");
+const timeGauge = document.getElementById("timeGauge");
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
 
-
-            
-        }
-        else if(i===1){
-            question.innerHTML = list[5].question;
-            for(var j=0;j<option.length;j++){
-                option[j].innerHTML = list[5].options[j];
-            }
-        }
-        else if(i===2){
-            question.innerHTML = list[8].question;
-            for(var j=0;j<option.length;j++){
-                option[j].innerHTML = list[8].options[j];
-            }
-        }
-        else if(i===3){
-            let k=parseInt(Math.random()*10);
-            question.innerHTML = list[k].question;
-            for(var j=0;j<option.length;j++){
-                option[j].innerHTML = list[k].options[j];
-            }
-        }
-        
-      }
-}
-
-const list  = [
-    //isoceles triangle
+// create our questions
+let questions = [
     {
-        question:"An isosceles triangle has a base of 6 and a height of 4. What is the perimeter of the triangle?",
-        options:[24,16,12,"None of these"],
-        answer:16
-    },
-    {
-        question:"What is the area of a square that has a diagonal whose endpoints in the coordinate plane are located at (-8, 6) and (2, -4)?",
-        options:["200√2","50√2","100","100√2"],
-        answer:100
-    },
-    {
-        question:"The length of the diagonal of a given square is 42–√. What is the square's area?",
-        options:[20,24,28,16],
-        answer:16
-    },
-    {
-        question:"Two sides of an isosceles triangle are 20 and 30. What is the difference of the largest and the smallest possible perimeters?",
-        options:[15,10,30,0],
-        answer:10
-    },
-    {
-        question:"The base angle of an isosceles triangle is five more than twice the vertex angle.  What is the base angle?",
-        options:[73,55,62,34],
-        answer:73
-    },
-    //equilateral triangle
-    {
-        question:" In an equilateral triangle, what is the sum of any two of its angles? ",
-        options:[60,90,120,150],
-        answer:120,
-    },
-    {
-        question:"There are 2 equilateral traingles of length 60cm and 50cm.They both are ___",
-        options:["congruent","similar","equal","same"],
-        answer:"similar",
-    },
-    {
-        question:"The relation between the altitude, median, angle bisector, and perpendicular bisector for each side in equilateral triangle is ____",
-        options:["all are same","all are perpendicular to each other","bisect the triangle","none of the above"],
-        answer:"all are same",
-    },
-    //Right angled triangle
-    {
-        question:"A right triangle ABC is given where angle B = 90 degrees.Which side of the triangle is the longest?",
-        options:["side CA","side BC","side AB","cannot be determined"],
-        answer:"side CA",
+        question:"An isosceles triangle has a base of 6 and a height of 4. What is the perimeter of the triangle?",        imgSrc : "img/html.png",
+        choiceA : "16",
+        choiceB : "24",
+        choiceC : "12",
+        correct : "A"
     },{
-        question:" The Pythagorean Theorem states that:'The square of the hypotenuse of a right angle triangle is equal to the sum of the squares of the other two sides.'This means that, in a right triangle ABC with hypotenuse AC:",
-        options:["(AB + AC)^2 = BC^2)","AB^2 + BC^2 = AC^2","(AB + BC) (AB - BC) = AC^2","(AB + BC) (AB - BC) = AC^2"],
-        answer:"AB^2 + BC^2 = AC^2",
-    },
-    {
-        question:"There is a triangle XYZ where XY is perpendicular to YZ and angle X = 70 degrees. What is the measure of angle Z?",
-        options:["30 degrees","20 degrees","130 degrees","110 degrees"],
-        answer:"20 degrees",
-    },
+        question:"Two sides of an isosceles triangle are 20 and 30. What is the difference of the largest and the smallest possible perimeters?",      
+          imgSrc : "img/css.png",
+        choiceA : "15",
+        choiceB : "10",
+        choiceC : "20",
+        correct : "B"
+    },{
+        question:"The base angle of an isosceles triangle is five more than twice the vertex angle.  What is the base angle?",        imgSrc : "img/js.png",
+        choiceA : "62",
+        choiceB : "55",
+        choiceC : "73",
+        correct : "C"
+    }
+];
 
+// create some variables
+
+const lastQuestion = questions.length - 1;
+let runningQuestion = 0;
+let count = 0;
+const questionTime = 10; // 10s
+const gaugeWidth = 150; // 150px
+const gaugeUnit = gaugeWidth / questionTime;
+let TIMER;
+let score = 0;
+
+// render a question
+function renderQuestion(){
+    let q = questions[runningQuestion];
     
-]
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+    question.innerHTML = "<p>"+ q.question +"</p>";
+    // qImg.innerHTML = "<img src="+ q.imgSrc +">";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
 }
 
-function checkAnswerHandler(){
+start.addEventListener("click",startQuiz);
 
-}
-function listHandler(event){
-    console.log(event.target.value);
-}
-for(let p=0;p<li.length;p++){
-    li[p].addEventListener("click",listHandler);
+// start quiz
+function startQuiz(){
+    start.style.display = "none";
+    renderQuestion();
+    quiz.style.display = "block";
+    renderProgress();
+    renderCounter();
+    TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
 }
 
-submitBtn.addEventListener("click",checkAnswerHandler)
+// render progress
+function renderProgress(){
+    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
+        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+    }
+}
+
+// counter render
+
+function renderCounter(){
+    if(count <= questionTime){
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++
+    }else{
+        count = 0;
+        // change progress color to red
+        answerIsWrong();
+        if(runningQuestion < lastQuestion){
+            runningQuestion++;
+            renderQuestion();
+        }else{
+            // end the quiz and show the score
+            clearInterval(TIMER);
+            scoreRender();
+        }
+    }
+}
+
+// checkAnwer
+
+function checkAnswer(answer){
+    if( answer == questions[runningQuestion].correct){
+        // answer is correct
+        score++;
+        // change progress color to green
+        answerIsCorrect();
+    }else{
+        // answer is wrong
+        // change progress color to red
+        answerIsWrong();
+    }
+    count = 0;
+    if(runningQuestion < lastQuestion){
+        runningQuestion++;
+        renderQuestion();
+    }else{
+        // end the quiz and show the score
+        clearInterval(TIMER);
+        scoreRender();
+    }
+}
+
+// answer is correct
+function answerIsCorrect(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+}
+
+// answer is Wrong
+function answerIsWrong(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+}
+
+// score render
+function scoreRender(){
+    scoreDiv.style.display = "block";
+    
+    // calculate the amount of question percent answered by the user
+    const scorePerCent = Math.round(100 * score/questions.length);
+    
+    // choose the image based on the scorePerCent
+    let img = (scorePerCent >= 80) ? "img/5.png" :
+              (scorePerCent >= 60) ? "img/4.png" :
+              (scorePerCent >= 40) ? "img/3.png" :
+              (scorePerCent >= 20) ? "img/2.png" :
+              "img/1.png";
+    
+    scoreDiv.innerHTML = "<img src="+ img +">";
+    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
