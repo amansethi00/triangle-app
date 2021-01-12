@@ -139,3 +139,7 @@ li {
   display: inline;
   margin: 0 2rem;
 }
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
